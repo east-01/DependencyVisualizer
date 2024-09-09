@@ -48,8 +48,11 @@ class DependencyVisualizer:
                     continue
                 self.graph.add_edge(json["name"], reference)
 
-vis = DependencyVisualizer("C:/East/Prog/Unity/PackDev", ["Core", "Networking", "PlayerMgmt"])
+vis = DependencyVisualizer("C:/East/Prog/Unity/PackDev", ["Core", "Bootstrapper", "Networking", "PlayerMgmt"])
 vis.find_asmdef_files()
 vis.generate_edges()
+
+print(f"Cycles: {list(nx.simple_cycles(vis.graph))}")
+
 nx.draw(vis.graph, with_labels=True, node_size=2000, node_color='lightblue', font_size=10, font_weight='bold', arrows=True)
 plt.show()
